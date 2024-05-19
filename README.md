@@ -110,7 +110,7 @@ make models
 
 ## Endpoints
 
-### Create a New Blog Post
+#### Create a New Blog Post
 
 ```sh
 curl -X POST http://localhost:8080/posts \
@@ -122,19 +122,19 @@ curl -X POST http://localhost:8080/posts \
 }'
 ```
 
-Retrieve All Blog Posts
+#### Retrieve All Blog Posts
 
 ```sh
 curl -X GET http://localhost:8080/posts
 ```
 
-Retrieve a Specific Blog Post
+#### Retrieve a Specific Blog Post
 
 ```sh
 curl -X GET http://localhost:8080/posts/1
 ```
 
-Update an Existing Blog Post
+#### Update an Existing Blog Post
 
 ```sh
 curl -X PUT http://localhost:8080/posts/1 \
@@ -146,13 +146,13 @@ curl -X PUT http://localhost:8080/posts/1 \
 }'
 ```
 
-Delete a Blog Post
+#### Delete a Blog Post
 
 ```sh
 curl -X DELETE http://localhost:8080/posts/1
 ```
 
-#### Running the Server
+### Running the Server
 
 To run the server, use the following command:
 
@@ -165,5 +165,3 @@ Or you can build and run as executable file
 make build
 make run
 ```
-
-Replace http://localhost:8080 with the actual URL of your running server if it's different.
