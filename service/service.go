@@ -33,7 +33,6 @@ type Repo interface {
 	Delete(id int) error
 }
 
-// CreatePost adds a new post
 func (app *Application) CreatePost(post models.Post) error {
 	dbPost := storage.Post{
 		ID:      post.ID,
@@ -47,7 +46,6 @@ func (app *Application) CreatePost(post models.Post) error {
 	return app.repository.Create(dbPost)
 }
 
-// GetPosts retrieves all posts
 func (app *Application) GetPosts() ([]models.Post, error) {
 	app.logger.Debug("Retrieving all posts")
 
@@ -69,7 +67,6 @@ func (app *Application) GetPosts() ([]models.Post, error) {
 	return posts, nil
 }
 
-// GetPostByID retrieves a post by its ID
 func (app *Application) GetPostByID(id int) (models.Post, error) {
 	app.logger.Debug("Retrieving post by ID", slog.Int("id", id))
 
@@ -86,7 +83,6 @@ func (app *Application) GetPostByID(id int) (models.Post, error) {
 	}, nil
 }
 
-// UpdatePost updates an existing post
 func (app *Application) UpdatePost(post models.Post) error {
 	dbPost := storage.Post{
 		ID:      post.ID,
@@ -99,7 +95,6 @@ func (app *Application) UpdatePost(post models.Post) error {
 	return app.repository.Update(dbPost)
 }
 
-// DeletePost deletes a post by its ID
 func (app *Application) DeletePost(id int) error {
 	app.logger.Debug("Deleting post", slog.Int("id", id))
 	return app.repository.Delete(id)

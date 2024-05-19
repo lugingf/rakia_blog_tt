@@ -22,7 +22,7 @@ type Post struct {
 // InMemoryPostRepository implements the Repo interface
 type InMemoryPostRepository struct {
 	data   *sync.Map
-	nextID int64
+	nextID int64 // Primary Key, Autoincrement :)
 	logger *slog.Logger
 }
 
@@ -32,7 +32,6 @@ func NewInMemoryPostRepository(logger *slog.Logger) *InMemoryPostRepository {
 	return &InMemoryPostRepository{data: db, nextID: 1, logger: logger}
 }
 
-// Create adds a new post to the repository
 func (repo *InMemoryPostRepository) Create(post Post) error {
 	post.ID = repo.nextID
 	repo.nextID++
@@ -40,7 +39,6 @@ func (repo *InMemoryPostRepository) Create(post Post) error {
 	return nil
 }
 
-// GetAll retrieves all posts from the repository
 func (repo *InMemoryPostRepository) GetAll() ([]Post, error) {
 	posts := []Post{}
 	repo.data.Range(func(key, value interface{}) bool {
@@ -50,7 +48,6 @@ func (repo *InMemoryPostRepository) GetAll() ([]Post, error) {
 	return posts, nil
 }
 
-// GetByID retrieves a post by its ID
 func (repo *InMemoryPostRepository) GetByID(id int) (Post, error) {
 	post, ok := repo.data.Load(strconv.Itoa(id))
 	if !ok {
@@ -59,7 +56,6 @@ func (repo *InMemoryPostRepository) GetByID(id int) (Post, error) {
 	return post.(Post), nil
 }
 
-// Update updates an existing post in the repository
 func (repo *InMemoryPostRepository) Update(post Post) error {
 	_, ok := repo.data.Load(strconv.FormatInt(post.ID, 10))
 	if !ok {
@@ -71,7 +67,6 @@ func (repo *InMemoryPostRepository) Update(post Post) error {
 	return nil
 }
 
-// Delete removes a post from the repository
 func (repo *InMemoryPostRepository) Delete(id int) error {
 	_, ok := repo.data.Load(strconv.Itoa(id))
 	if !ok {
