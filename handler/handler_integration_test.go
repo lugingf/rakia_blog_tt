@@ -22,8 +22,7 @@ import (
 type metricsMock struct {
 }
 
-func (m *metricsMock) SaveHTTPDuration(timeSince time.Time, path string, code int, method string) {
-	return
+func (m *metricsMock) ObserveHTTPDuration(timeSince time.Time, path string, code int, method string) {
 }
 
 func loggerMock() *slog.Logger {

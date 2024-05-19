@@ -23,6 +23,8 @@ type Application struct {
 	logger     *slog.Logger
 }
 
+// Repo interface
+// Put interface in the place where we use it, to avoid unnecessary dependencies
 type Repo interface {
 	Create(post storage.Post) error
 	GetAll() ([]storage.Post, error)

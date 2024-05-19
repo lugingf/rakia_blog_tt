@@ -12,6 +12,13 @@ import (
 
 var ErrPostNotFound = errors.New("post not found")
 
+type Post struct {
+	ID      int64
+	Title   string
+	Content string
+	Author  string
+}
+
 // InMemoryPostRepository implements the Repo interface
 type InMemoryPostRepository struct {
 	data   *sync.Map
@@ -77,6 +84,7 @@ func (repo *InMemoryPostRepository) Delete(id int) error {
 }
 
 // saveToFile saves the current state of the repository to a file
+// No usage now. Added just in case. Easy to implement and control via config if we need to persist in-mem DB content
 func (repo *InMemoryPostRepository) saveToFile(filename string) error {
 	posts, err := repo.GetAll()
 	if err != nil {
@@ -92,6 +100,7 @@ func (repo *InMemoryPostRepository) saveToFile(filename string) error {
 }
 
 // loadFromFile loads the state of the repository from a file
+// No usage now. Added just in case. Easy to implement and control via config if we need to persist in-mem DB content
 func (repo *InMemoryPostRepository) loadFromFile(filename string) error {
 	data, err := os.ReadFile(filename)
 	if err != nil {

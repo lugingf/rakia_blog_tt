@@ -30,17 +30,17 @@ func main() {
 	}
 
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+	metrics := config.InitMetrics()
+	go runMetricServer(cfg.Monitoring)
 
 	postRepo := storage.NewInMemoryPostRepository(logger)
+	repoMetric := storage.NewStorageMetricDecorator(postRepo, metrics)
 
-	application := service.New(postRepo, logger)
+	application := service.New(repoMetric, logger)
 
 	hndl := handler.New(
 		application, logger,
 	)
-
-	metrics := config.InitMetrics()
-	go runMetricServer(cfg.Monitoring)
 
 	server := http.Server{
 		Addr:        fmt.Sprintf(":%s", cfg.App.Port),

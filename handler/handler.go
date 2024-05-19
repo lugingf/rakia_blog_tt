@@ -31,7 +31,7 @@ func (h *Handler) DefaultHandler(w http.ResponseWriter, req *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(rj)
+	w.Write(rj) // nolint:errcheck
 }
 
 func (h *Handler) GetPosts(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +41,7 @@ func (h *Handler) GetPosts(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to retrieve posts", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(posts)
+	json.NewEncoder(w).Encode(posts) // nolint:errcheck
 }
 
 func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
@@ -83,7 +83,7 @@ func (h *Handler) GetPost(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	json.NewEncoder(w).Encode(post)
+	json.NewEncoder(w).Encode(post) // nolint:errcheck
 }
 
 func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {

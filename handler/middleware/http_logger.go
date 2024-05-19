@@ -17,7 +17,7 @@ type LoggerController struct {
 }
 
 type MetricsInterface interface {
-	SaveHTTPDuration(timeSince time.Time, path string, code int, method string)
+	ObserveHTTPDuration(timeSince time.Time, path string, code int, method string)
 }
 
 func NewLoggerController(logger *slog.Logger, m MetricsInterface) *LoggerController {
@@ -63,7 +63,7 @@ func (lc *LoggerController) LoggingMiddleware(next http.Handler) http.Handler {
 		routeContext := chi.RouteContext(r.Context())
 		path := strings.Join(routeContext.RoutePatterns, "")
 		lc.logger.Info("Request handled", "path", path, "responce_status", recorder.Status, "method", r.Method)
-		lc.metrics.SaveHTTPDuration(start, path, recorder.Status, r.Method)
+		lc.metrics.ObserveHTTPDuration(start, path, recorder.Status, r.Method)
 		lc.logger.Info("Response returned", "body", recorder.ResponseBody)
 	})
 }

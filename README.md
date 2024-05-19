@@ -144,7 +144,7 @@ To run the server, use the following command:
 
 ```sh
 go run main.go
-```
+```m
 
 Or you can build and run as executable file
 ```sh
