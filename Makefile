@@ -1,10 +1,10 @@
 .PHONY: lint, test, check
 
 test:
-	go test -v ./... 
+	go test -v ./...
 
 test-n:
-	source .env.local && go test -v -count=1 -p=1 ./... -run $(name)
+	source .env.local && go test -v ./... -run $(name)
 
 lint:
 	golangci-lint run -v --skip-dirs=test

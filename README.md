@@ -59,6 +59,20 @@ Ensure you have a .env.local file with the necessary environment variables. This
 
 ### Summary of Makefile Commands
 
+#### test
+Runs embedded unit and integration tests
+
+```sh
+make test
+```
+
+#### test-n
+Can run specific test by its name
+
+```sh
+make test-n name=TestIntegration_CreatePostHandler
+```
+
 #### lint:
 Runs golangci-lint to lint the Go code.
 
