@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Event Staffing API",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/posts": {
+      "get": {
+        "summary": "Retrieve a list of all blog posts",
+        "responses": {
+          "200": {
+            "description": "A list of blog posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Post"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new blog post",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "required": true,
+            "description": "Blog post object that needs to be added",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Blog post created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "summary": "Retrieve details of a specific blog post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the blog post to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the blog post",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an existing blog post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the blog post to update"
+          },
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Updated blog post object",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog post updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a blog post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the blog post to delete"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Blog post deleted"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Post": {
+      "type": "object",
+      "required": ["title", "content", "author"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "title": {
+          "type": "string",
+          "example": "Title 1",
+          "x-nullable": false
+        },
+        "content": {
+          "type": "string",
+          "example": "Quaerat sit dolorem velit. Ipsum non tempora magnam neque tempora. Tempora dolorem adipisci tempora neque labore. Dolorem sed dolore sed. Voluptatem consectetur dolor voluptatem. Quiquia adipisci voluptatem modi dolore. Dolor etincidunt neque consectetur dolor. Numquam etincidunt voluptatem sit amet tempora. Modi dolorem sed magnam consectetur. Dolor dolorem est amet magnam velit.",
+          "x-nullable": false
+        },
+        "author": {
+          "type": "string",
+          "example": "Author 1",
+          "x-nullable": false
+        }
+      }
+    }
+  }
+}
